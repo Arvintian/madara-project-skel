@@ -1,1 +1,1 @@
-# code-dist-api
+# {{cookiecutter.project_name}}
