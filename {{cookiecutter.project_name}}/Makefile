@@ -1,5 +1,5 @@
-REGISTRY = arvintian
-PROJECT = code-dist-api
+REGISTRY = {{cookiecutter.registry}}
+PROJECT = {{cookiecutter.project_name}}
 VERSION = 1.0.0
 
 package:

@@ -1,5 +1,5 @@
 {
     "project_name": "madara-demo",
     "package_name": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
-    "Registry": "your-image-registry"
+    "registry": "your-image-registry"
 }
