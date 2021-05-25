@@ -49,6 +49,7 @@ def main():
     processes = []
     for target in targets:
         process = target()
+        processes.append(process)
 
     def exit_kill(sig, frame):
         if sys.version_info >= (3, 7):
