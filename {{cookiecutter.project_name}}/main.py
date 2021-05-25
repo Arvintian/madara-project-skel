@@ -1,9 +1,5 @@
 from {{cookiecutter.package_name}} import app
 from gunicorn.app.base import BaseApplication
-from pretty_logging import pretty_logger
-import multiprocessing
-import signal
-import sys
 
 
 class WebApplication(BaseApplication):
@@ -23,44 +19,16 @@ class WebApplication(BaseApplication):
         return self.application
 
 
-def start_server():
-    """
-    启动 http server
-    """
-    def _start_server():
-        pretty_logger.info("start server process")
-        options = {
-            "bind": "{}:{}".format("0.0.0.0", "5000"),
-            "workers": 2,
-            "accesslog": "-",
-            "errorlog": "-",
-        }
-        WebApplication(app, options).run()
-        return
-    process = multiprocessing.Process(target=_start_server)
-    process.daemon = False
-    process.start()
-    return process
-
-
 def main():
 
-    targets = [start_server]
-    processes = []
-    for target in targets:
-        process = target()
-        processes.append(process)
+    options = {
+        "bind": "{}:{}".format("0.0.0.0", "5000"),
+        "workers": 2,
+        "accesslog": "-",
+        "errorlog": "-",
+    }
 
-    def exit_kill(sig, frame):
-        if sys.version_info >= (3, 7):
-            for proc in processes:
-                proc.kill()
-        else:
-            for proc in processes:
-                proc.terminate()
-    for sig in [signal.SIGINT, signal.SIGHUP, signal.SIGTERM]:
-        signal.signal(sig, exit_kill)
-    signal.pause()
+    WebApplication(app, options).run()
 
 
 if __name__ == "__main__":
