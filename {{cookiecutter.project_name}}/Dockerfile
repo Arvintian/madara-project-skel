@@ -1,4 +1,4 @@
-FROM arvintian/base-image:1.2.1
+FROM arvintian/base-image:1.3.2
 
 RUN mkdir /app
 WORKDIR /app
